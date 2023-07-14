@@ -20,7 +20,7 @@ configuration {
     fg2:    #4C566A80;
     fg3:    #88C0D0F2;
     bg0:    #D8DEE9;
-    bg02:    #D8DEE965;
+    bg02:   #D8DEE9D0;
     bg1:    #ECEFF4;
     bg2:    #D8DEE9;
     bg3:    #151E3D;

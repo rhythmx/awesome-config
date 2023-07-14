@@ -76,7 +76,8 @@ local hotkeys_popup = wm.hotkeys_popup
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 
-
+--TODO: run this in a better spot
+awful.spawn.with_shell("picom &")
 
 -- Menubar configuration
 menubar.utils.terminal = wm.prefs.terminal -- Set the terminal for applications that require it
@@ -92,9 +93,9 @@ awful.screen.connect_for_each_screen(wm:default_screen_setup())
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () wm.mainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    wm.awful.button({ }, 3, function () wm.mainmenu:toggle() end),
+    wm.awful.button({ }, 4, wm.awful.tag.viewnext),
+    wm.awful.button({ }, 5, wm.awful.tag.viewprev)
 ))
 -- }}}
 
@@ -147,6 +148,7 @@ globalkeys = gears.table.join(
   wm:key(modshift, "space",  "layout",   "select previous",                function () awful.layout.inc(-1)                end),
   wm:key(modkey,   "Return", "launcher", "open a terminal",                function () awful.spawn(wm.prefs.terminal) end ),
   wm:key(modkey,   "r",      "launcher", "run prompt",                     function () awful.screen.focused().mypromptbox:run() end),
+  wm:key(modkey,   "d",      "launcher", "run prompt",                     function () awful.spawn("rofi -show drun") end),
   wm:key(modkey,   "p",      "launcher", "show the menubar",               function () menubar.show() end),
   wm:key(modctrl,  "j",      "screen",   "focus next screen",              function () awful.screen.focus_relative( 1) end),
   wm:key(modctrl,  "k",      "screen",   "focus prev screen",              function () awful.screen.focus_relative(-1) end),
