@@ -2,7 +2,7 @@
 local WindowManager = {}
 
 -- Init tasks
-require("wm.error-handling")
+require("error-handling")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- Derived class method new
@@ -55,16 +55,20 @@ function WindowManager:set_mainmenu(menuarg)
 end
 
 -- TODO: add means of overriding with a hook
-function WindowManager:set_wallpaper()
+function WindowManager:set_wallpaper(screen)
+
   -- Wallpaper
-  if self.beautiful.wallpaper then
-    local wallpaper = self.beautiful.wallpaper
+  local wallpaper
+  if self.prefs.wallpaper then
+    wallpaper = self.prefs.wallpaper
+  elseif self.beautiful.wallpaper then
+    wallpaper = self.beautiful.wallpaper
     -- If wallpaper is a function, call it with the screen
     if type(wallpaper) == "function" then
-      wallpaper = wallpaper(s)
+      wallpaper = wallpaper(screen)
     end
-    self.gears.wallpaper.maximized(wallpaper, s, true)
   end
+  self.gears.wallpaper.maximized(wallpaper, screen, true)
 end
 
 --
@@ -360,14 +364,14 @@ end
 function WindowManager:client_move()
   return function(c)
     c:emit_signal("request::activate", "mouse_click", {raise = true})
-    awful.mouse.client.move(c)
+    self.awful.mouse.client.move(c)
   end
 end
 
 function WindowManager:client_resize()
   return function(c)
     c:emit_signal("request::activate", "mouse_click", {raise = true})
-    awful.mouse.client.resize(c)
+    self.awful.mouse.client.resize(c)
   end
 end
 
