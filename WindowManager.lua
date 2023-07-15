@@ -231,7 +231,7 @@ end
 
 function WindowManager:screen_view_tag_idx(idx)
   return function()
-    local screen = awful.screen.focused()
+    local screen = self.awful.screen.focused()
     local tag = screen.tags[idx]
     if tag then
       tag:view_only()
