@@ -76,8 +76,9 @@ local hotkeys_popup = wm.hotkeys_popup
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 
---TODO: run this in a better spot
+--TODO: run these in a better spot
 awful.spawn.with_shell("picom &")
+awful.spawn.with_shell("~./screenlayout/default.sh")
 
 -- Menubar configuration
 menubar.utils.terminal = wm.prefs.terminal -- Set the terminal for applications that require it
